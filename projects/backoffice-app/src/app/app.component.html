@@ -1,0 +1,13 @@
+<h1>{{ title }}</h1>
+
+<!-- Formulário simples -->
+<div class="form">
+  <input type="text" [(ngModel)]="newUser.nome" placeholder="Nome" />
+  <input type="email" [(ngModel)]="newUser.email" placeholder="Email" />
+
+  <ui-ui-button variant="primary" (click)="addUser()">Salvar</ui-ui-button>
+  <ui-ui-button variant="secondary" (click)="newUser={nome:'',email:''}">Cancelar</ui-ui-button>
+</div>
+
+<!-- Tabela -->
+<ui-ui-table [columns]="columns" [data]="data"></ui-ui-table>
