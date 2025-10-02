@@ -1,13 +1,38 @@
-<h1>{{ title }}</h1>
+<div class="container mt-5">
+  <h1 class="mb-4">{{ title }}</h1>
 
-<!-- Formulário simples -->
-<div class="form">
-  <input type="text" [(ngModel)]="newUser.nome" placeholder="Nome" />
-  <input type="email" [(ngModel)]="newUser.email" placeholder="Email" />
+  <!-- Formulário de cadastro -->
+  <div class="card p-3 mb-4 shadow-sm">
+    <div class="row g-3 align-items-center">
+      <div class="col-md-4 position-relative">
+        <input type="text" class="form-control pe-5" [(ngModel)]="newUser.nome" placeholder="Nome">
+      </div>
 
-  <ui-ui-button variant="primary" (click)="addUser()">Salvar</ui-ui-button>
-  <ui-ui-button variant="secondary" (click)="newUser={nome:'',email:''}">Cancelar</ui-ui-button>
+      <div class="col-md-4 position-relative">
+        <input type="email" class="form-control pe-5" [(ngModel)]="newUser.email" placeholder="Email">
+      </div>
+
+      <div class="col-md-4 d-flex gap-2">
+        <ui-ui-button variant="primary" size="md" (click)="addUser()">Salvar</ui-ui-button>
+        <ui-ui-button variant="secondary" size="md"
+          (click)="newUser={id: null, nome:'', email:''}">Cancelar</ui-ui-button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tabela de usuários -->
+  <div class="card p-3 shadow-sm">
+    <ui-ui-table [columns]="columns" [data]="data">
+      <ng-template #actions let-row>
+        <div class="d-flex gap-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onEdit(row)">
+            ✏️
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDelete(row.id)">
+            ❌
+          </button>
+        </div>
+      </ng-template>
+    </ui-ui-table>
+  </div>
 </div>
-
-<!-- Tabela -->
-<ui-ui-table [columns]="columns" [data]="data"></ui-ui-table>

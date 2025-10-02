@@ -8,14 +8,18 @@ export class DataService {
   private storageKey = 'usuarios';
 
   getAll() {
-    const data = localStorage.getItem(this.storageKey);
-    return data ? JSON.parse(data) : [];
+    if (typeof localStorage !== 'undefined') {
+      const data = localStorage.getItem('users');
+      return data ? JSON.parse(data) : [];
+    }
+    return [];
   }
 
-  save(item: any) {
-    const data = this.getAll();
-    data.push(item);
-    localStorage.setItem(this.storageKey, JSON.stringify(data));
+
+  save(data: any[]) {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('users', JSON.stringify(data));
+    }
   }
 
   update(index: number, item: any) {

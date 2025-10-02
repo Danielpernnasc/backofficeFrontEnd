@@ -1,25 +1,29 @@
-import { Component, Input } from '@angular/core';
+import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'ui-ui-table',
   standalone: true,
   imports: [CommonModule],
-  template: `<table>
-      <thead>
-        <tr><th *ngFor="let col of columns">{{ col }}</th></tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let row of data">
-          <td *ngFor="let col of columns">{{ row[col] }}</td>
-        </tr>
-      </tbody>
-    </table>`,
-  styleUrls: ['./ui-table.component.css']
+  templateUrl: './ui-table.component.html',
+  styleUrls: ['./ui-table.component.scss']
 })
 export class UiTableComponent {
 
   @Input() columns: string[] = [];
   @Input() data: any[] = [];
+
+  @Output() edit = new EventEmitter<any>();
+  @Output() delete = new EventEmitter<number>();
+  @ContentChild('actions') actionsTemplate!: TemplateRef<any>;
+  showActions = true;
+
+  editUser(user: any) {
+    this.edit.emit(user);
+  }
+
+  deleteUser(id: number) {
+    this.delete.emit(id);
+  }
 
 }

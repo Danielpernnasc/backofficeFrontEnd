@@ -1,1 +1,16 @@
-<p>ui-table works!</p>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th *ngFor="let col of columns">{{ col }}</th>
+      <th *ngIf="actionsTemplate">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of data">
+      <td *ngFor="let col of columns">{{ row[col] }}</td>
+      <td *ngIf="actionsTemplate">
+        <ng-container *ngTemplateOutlet="actionsTemplate; context: { $implicit: row }"></ng-container>
+      </td>
+    </tr>
+  </tbody>
+</table>

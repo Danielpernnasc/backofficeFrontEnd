@@ -3,6 +3,7 @@ import { RouterOutlet } from '@angular/router';
 import { UiButtonComponent, UiTableComponent } from "../../../ui-lib/src/public-api";
 import { DataService } from './services/data/data.service';
 import { FormsModule } from '@angular/forms';
+import { User } from './model/User.model';
 
 @Component({
   selector: 'app-root',
@@ -17,13 +18,15 @@ import { FormsModule } from '@angular/forms';
 })
 export class AppComponent implements OnInit {
   title = "BackOffice";
-  columns = ['id', 'nome', 'email'];
   data: any[] = [];
-  newUser = { nome: '', email: '' };
+  columns = ['id', 'nome', 'email', 'ações'];
+  newUser: User = {
+    id: null,
+    nome: '',
+    email: ''
+  };
 
-  constructor(private dataService: DataService) {
-
-  }
+  constructor(private dataService: DataService) { }
 
   ngOnInit() {
     this.loadData();
@@ -34,19 +37,24 @@ export class AppComponent implements OnInit {
   }
 
   addUser() {
-    if (!this.newUser.nome || !this.newUser.email) {
-      return;
+    if (this.newUser.id === null) {
+      this.newUser.id = this.data.length + 1;
+      this.data.push(this.newUser);
+    } else {
+      const index = this.data.findIndex(u => u.id === this.newUser.id);
+      this.data[index] = this.newUser;
     }
-
-    const id = this.data.length + 1;
-    const newUser = { id, ...this.newUser };
-    this.dataService.save(newUser);
-    this.newUser = { nome: '', email: '' };
-    this.loadData();
+    this.dataService.save(this.data);
+    this.newUser = { id: null, nome: '', email: '' };
   }
 
-  deleteUser(index: number) {
-    this.dataService.delete(index);
-    this.loadData();
+  onDelete(id: number) {
+    this.data = this.data.filter(u => u.id !== id);
+    this.dataService.save(this.data);
   }
+
+  onEdit(user: any) {
+    this.newUser = { ...user };
+  }
+
 }

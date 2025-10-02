@@ -30,7 +30,8 @@
               "projects/backoffice-app/src/assets"
             ],
             "styles": [
-              "projects/backoffice-app/src/styles.scss"
+              "projects/backoffice-app/src/styles.scss",
+              "node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
             "scripts": [],
             "server": "projects/backoffice-app/src/main.server.ts",
