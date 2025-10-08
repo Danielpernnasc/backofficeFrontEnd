@@ -1,0 +1,46 @@
+<div class="container mt-5">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <div class="d-flex align-items-center gap-3">
+      <h1 class="mb-0">{{ title }}</h1>
+      <button class="btn btn-outline-danger" (click)="onLogout()">
+        Sair
+      </button>
+    </div>
+  </div>
+
+  <!-- Formulário de cadastro -->
+  <div class="container mt-5">
+    <div class="card p-4 shadow-sm">
+      <h2 class="mb-4">Cadastro de Usuário</h2>
+      <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+        <div class="mb-3">
+          <label for="name" class="form-label">Nome</label>
+          <input type="text" id="name" class="form-control" name="name" [(ngModel)]="newUser.name" required />
+        </div>
+        <div class="mb-3">
+          <label for="email" class="form-label">Email</label>
+          <input type="email" id="email" class="form-control" name="email" [(ngModel)]="newUser.email" required />
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="userForm.invalid">
+          Salvar
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Tabela de usuários -->
+  <div class="card p-3 shadow-sm">
+    <ui-ui-table [columns]="columns" [data]="data">
+      <ng-template #actions let-row>
+        <div class="d-flex gap-1">
+          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onEdit(row)">
+            ✏️
+          </button>
+          <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDelete(row.id)">
+            ❌
+          </button>
+        </div>
+      </ng-template>
+    </ui-ui-table>
+  </div>
+</div>

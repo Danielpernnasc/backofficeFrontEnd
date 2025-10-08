@@ -1,5 +1,5 @@
 import { Component, ContentChild, EventEmitter, Input, Output, TemplateRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule } from '@angular/common';;
 
 @Component({
   selector: 'ui-ui-table',

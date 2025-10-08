@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "concurrently \"ng build ui-lib --watch\" \"ng serve backoffice-app\"",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",

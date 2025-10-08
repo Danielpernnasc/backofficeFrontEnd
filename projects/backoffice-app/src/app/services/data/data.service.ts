@@ -1,4 +1,7 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { catchError, map, Observable, of } from 'rxjs';
+import { User } from '../../model/User.model';
 
 @Injectable({
   providedIn: 'root'
@@ -7,30 +10,53 @@ export class DataService {
 
   private storageKey = 'usuarios';
 
-  getAll() {
-    if (typeof localStorage !== 'undefined') {
-      const data = localStorage.getItem('users');
-      return data ? JSON.parse(data) : [];
-    }
-    return [];
+  private urlBack = 'http://localhost:8080/api/users'
+
+  constructor(private http: HttpClient) { }
+
+
+  getUsers(): Observable<number | string> {
+    return this.http.get<number | string>(this.urlBack).pipe(
+      map((res) => res as number | string),
+      catchError((error) => {
+        return of(`Error: ${error.message}`);
+      })
+    )
+  }
+
+  postUser(user: User): Observable<{ id: string; name: string; email: string }> {
+    return this.http.post<{ id: string; name: string; email: string }>(this.urlBack, user);
   }
 
 
-  save(data: any[]) {
-    if (typeof localStorage !== 'undefined') {
-      localStorage.setItem('users', JSON.stringify(data));
-    }
+  getUsersById(id: number): Observable<string> {
+    return this.http.get<string>(`${this.urlBack}/${id}`).pipe(
+      map((res) => res as string),
+      catchError((error) => {
+        return of(`Error: ${error.message}`);
+      })
+    );
   }
 
-  update(index: number, item: any) {
-    const data = this.getAll();
-    data[index] = item;
-    localStorage.setItem(this.storageKey, JSON.stringify(data));
+  putUser(id: number, user: { name: string, email: string }): Observable<number> {
+    return this.http.put<number>(`${this.urlBack}/${id}`, user).pipe(
+      map((res) => res as number),
+      catchError((error) => {
+        console.error(`Error: ${error.message}`);
+        return of(-1);
+      })
+    )
   }
 
-  delete(index: number) {
-    const data = this.getAll();
-    data.splice(index, 1);
-    localStorage.setItem(this.storageKey, JSON.stringify(data));
+  deleteUser(id: number): Observable<number> {
+    return this.http.delete<number>(`${this.urlBack}/${id}`).pipe(
+      map((res) => res as number),
+      catchError((error) => {
+        console.error(`Error: ${error.message}`);
+        return of(-1);
+      })
+    )
   }
+
+
 }

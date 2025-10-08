@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
         <ui-ui-button (click)="closeModal()">Fechar</ui-ui-button>
       </div>
     </div>`,
-  styleUrl: './ui-modal.component.css'
+  styleUrl: './ui-modal.component.scss'
 })
 export class UiModalComponent {
   @Input() title: string = '';

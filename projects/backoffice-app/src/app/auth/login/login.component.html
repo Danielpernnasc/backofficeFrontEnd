@@ -1,0 +1,18 @@
+<div class="d-flex align-items-center justify-content-center min-vh-100 bg-light">
+  <div class="card shadow-sm" style="max-width:400px; width:100%;">
+    <div class="card-body">
+      <!-- Título do Backoffice -->
+      <h2 class="text-center mb-4 text-primary">Backoffice</h2>
+
+
+      <div id="google-btn" class="d-flex justify-content-center mb-3"></div>
+
+      <!-- Botão alternativo estilizado -->
+      <button class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-center gap-2"
+        (click)="onGoogleLogin()">
+        <img [src]="'assets/simboloGoogle.png'" alt="Google Logo" style="width:20px; height:20px;">
+        Entrar com Google
+      </button>
+    </div>
+  </div>
+</div>

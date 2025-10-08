@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
   template: `<button [disabled]="disabled" class="ui-btn ui-{{variant}} ui-{{size}}">
                <ng-content></ng-content>
              </button>`,
-  styleUrl: './ui-button.component.css'
+  styleUrl: './ui-button.component.scss'
 })
 export class UiButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'tertiary' = 'primary';
