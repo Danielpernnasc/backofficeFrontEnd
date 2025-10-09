@@ -20,7 +20,7 @@ import { UiButtonComponent, UiTableComponent } from '../../../../ui-lib/src/publ
 export class DashboardComponent {
   title = "BackOffice";
   data: any[] = [];
-  columns = ['id', 'nome', 'e-mail'];
+  columns = ['id', 'name', 'email'];
   newUser: User = {
     id: null,
     name: '',

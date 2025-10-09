@@ -8,4 +8,4 @@ bootstrapApplication(AppComponent, {
   providers: [importProvidersFrom(UiButtonComponent)],
 });
 
-export class AppModuleModule { }
+export class AppModule { }

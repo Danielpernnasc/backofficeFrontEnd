@@ -26,21 +26,23 @@
         </button>
       </form>
     </div>
+    <br /><br />
+    <div class="card p-3 shadow-sm">
+      <ui-ui-table [columns]="columns" [data]="data">
+        <ng-template #actions let-row>
+          <div class="d-flex gap-1">
+            <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onEdit(row)">
+              ✏️
+            </button>
+            <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDelete(row.id)">
+              ❌
+            </button>
+          </div>
+        </ng-template>
+      </ui-ui-table>
+    </div>
   </div>
 
   <!-- Tabela de usuários -->
-  <div class="card p-3 shadow-sm">
-    <ui-ui-table [columns]="columns" [data]="data">
-      <ng-template #actions let-row>
-        <div class="d-flex gap-1">
-          <button type="button" class="btn btn-sm btn-outline-secondary" (click)="onEdit(row)">
-            ✏️
-          </button>
-          <button type="button" class="btn btn-sm btn-outline-danger" (click)="onDelete(row.id)">
-            ❌
-          </button>
-        </div>
-      </ng-template>
-    </ui-ui-table>
-  </div>
+
 </div>
